@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-md">
+  <h2 class="text-2xl font-bold text-green-700 mb-4 text-center">Nous contacter</h2>
+
+  <form action="#" method="post" class="space-y-4" onsubmit="return validateForm()">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Nom</label>
+      <input type="text" name="nom" class="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Votre nom">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Message</label>
+      <textarea id="message" name="message" rows="4" class="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Votre message...suivi de votre numero de téléphone en cas de contact"></textarea>
+    </div>
+    <button type="submit" id="submitBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 w-full" disabled>Envoyer</button>
+  </form>
+
+  <div class="mt-6 text-center">
+    <p class="text-sm text-gray-600 mb-2">Ou contactez-nous directement :</p>
+    <a href="https://wa.me/2290151782679" target="_blank" class="inline-block bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
+      📱 Envoyer un message WhatsApp
+    </a>
+  </div>
+  
+  <div class="mt-8 bg-yellow-100 text-yellow-900 p-4 rounded-lg text-center">
+  💼 Vous aimez ce site et souhaitez le même pour votre entreprise ou projet ?  
+  <strong>Contactez notre assistant sur WhatsApp pour en discuter :</strong>  
+  <a href="https://wa.me/2290151782679" target="_blank" class="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+    📲 Parler à l'assistant maintenant
+  </a>
+</div>
+
+</div>
+
+<script>
+  const messageField = document.getElementById('message');
+  const submitBtn = document.getElementById('submitBtn');
+
+  // Activer/désactiver le bouton selon le contenu du message
+  messageField.addEventListener('input', () => {
+    submitBtn.disabled = messageField.value.trim() === '';
+  });
+
+  // Validation au submit pour sécurité supplémentaire
+  function validateForm() {
+    if (messageField.value.trim() === '') {
+      alert('Veuillez écrire un message avant d\'envoyer.');
+      return false; // Empêche l'envoi
+    }
+    return true;
+  }
+</script>
+
+{% endblock %}
+

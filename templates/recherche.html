@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="text-2xl font-bold text-green-700 mb-6">🔍 Résultats de la recherche</h1>
+
+  {% if produits %}
+    <ul class="space-y-4">
+      {% for produit in produits %}
+        <li class="bg-white p-4 rounded shadow">
+          <h2 class="text-lg font-semibold text-gray-800">{{ produit.nom }}</h2>
+          <p class="text-gray-600">{{ produit.description }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-gray-700">Aucun résultat trouvé pour : <strong>{{ query }}</strong></p>
+  {% endif %}
+{% endblock %}
+

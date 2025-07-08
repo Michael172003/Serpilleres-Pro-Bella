@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Conteneur logos en haut -->
+<div class="max-w-7xl mx-auto px-6 flex items-center justify-between py-6 bg-gray-50">
+  <!-- Logo gauche -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="12" fill="#22C55E"/>
+    <path fill="#fff" d="M20 44h24v4H20zM20 32h24v4H20zM20 20h24v4H20z" />
+    <rect x="14" y="12" width="36" height="40" rx="8" stroke="#fff" stroke-width="3"/>
+  </svg>
+
+  <!-- Logo droite -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="30" fill="#16A34A"/>
+    <path fill="#fff" d="M32 12c0 12-16 20-16 28a16 16 0 0 0 32 0c0-8-16-16-16-28z"/>
+  </svg>
+</div>
+
+<!-- Contenu centré sous les logos -->
+<div class="text-center py-12 bg-gray-50 max-w-3xl mx-auto px-6">
+
+  <!-- Titre et description -->
+  <h1 class="text-4xl font-bold text-green-700 mb-4">🌿 Bienvenue sur Serpillères Pro Bella</h1>
+  <p class="text-lg text-gray-600 mb-6">Des serpillières durables, colorées et accessibles à tous</p>
+
+  <!-- Bouton vers les produits -->
+  <a href="{{ url_for('produits') }}" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 shadow">
+    🛍️ Voir nos produits encores disponibles
+  </a>
+</div>
+
+  <!-- Image décorative -->
+ <div class="mt-10 flex justify-center">
+  <img src="{{ url_for('static', filename='images/serpillere-accueil.jpg') }}"
+       alt="Image Serpillère"
+       class="rounded-2xl shadow-md w-full max-w-2xl object-cover aspect-video">
+</div>
+
+ <!-- Texte motivationnel -->
+<div class="mt-10 max-w-3xl mx-auto bg-white p-6 rounded-xl shadow text-gray-700 relative">
+  <h2 class="text-2xl font-semibold text-green-700 mb-4 flex items-center">
+    💧 Pourquoi choisir nos serpillières ?
+    <span class="ml-4 inline-block bg-green-200 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+      Produit certifié écologique
+    </span>
+  </h2>
+  <ul class="list-disc list-inside space-y-2">
+    <li>✔️ Fabriquées avec des matériaux écologiques, respectueux de votre santé et de la planète</li>
+    <li>✔️ Ultra absorbantes et réutilisables – économisez de l'argent tout en réduisant les déchets</li>
+    <li>✔️ Disponibles dans plusieurs coloris modernes pour s’adapter à votre intérieur</li>
+    <li>✔️ Traitement anti-bactérien intégré pour une hygiène parfaite</li>
+    <li>✔️ Séchage ultra-rapide pour un usage fréquent sans odeurs</li>
+    <li>✔️ Résistantes aux lavages répétés – durabilité garantie</li>
+    <li>✔️ Adaptées à tous types de sols, même les plus sensibles</li>
+    <li>✔️ Garantie satisfaction et sans conditions et bien plus encore d'autre choses que vous ne saviez pas encore...</li>
+  </ul>
+  <p class="mt-4 italic text-green-600 font-semibold">
+    “Une serpillère qui nettoie, protège et embellit votre maison – le choix naturel et intelligent.”
+  </p>
+  <p class="mt-6 text-gray-600 font-medium">
+    Nous proposons aussi une large gamme de serpillières : pour dessous de lit, salon, salle de douche, et bien d'autres, 
+    de toutes tailles et qualités pour répondre à tous vos besoins.
+  </p>
+</div>
+
+  <!-- Vidéo de présentation -->
+ <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center">
+  <!-- Vidéo 1 -->
+  <iframe class="w-full aspect-video rounded-xl shadow-md"
+          src="https://www.youtube.com/embed/99-NQ8BKoGY"
+          title="Vidéo 1"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+
+  <!-- Vidéo 2 (corrigée) -->
+  <iframe class="w-full aspect-video rounded-xl shadow-md"
+          src="https://www.youtube.com/embed/PnnF8AeQ32s"
+          title="Vidéo 2"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+</div>
+
+<!-- Histoire réelle avec traduction -->
+<div class="mt-16 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+
+  <!-- Version française -->
+  <div>
+    <h3 class="text-2xl font-bold text-green-700 mb-4">🧽 Une histoire vraie</h3>
+    <p class="text-gray-700 text-justify">
+      Dans un petit village béninois, une mère de famille utilisait chaque jour des morceaux de tissus usés pour nettoyer le sol. Ces tissus s'effilochaient, n'étaient pas hygiéniques, et demandaient beaucoup d'effort. 
+      Un jour, elle a découvert nos serpillières : robustes, absorbantes, et réutilisables. En quelques semaines, elle a pu gagner du temps, économiser de l’eau et garder sa maison impeccable.
+    </p>
+    <p class="text-gray-700 mt-4 text-justify">
+      Aujourd’hui, elle les recommande à tout son entourage. Ces serpillières ne sont pas seulement des outils de nettoyage, elles changent la vie des foyers modestes.
+    </p>
+  </div>
+
+  <!-- Version anglaise -->
+  <div>
+    <h3 class="text-2xl font-bold text-green-700 mb-4">🧼 A true story</h3>
+    <p class="text-gray-700 text-justify">
+      In a small village in Benin, a mother used worn-out cloth scraps daily to clean her floor. These rags would fray, were unhygienic, and required a lot of effort.
+      One day, she discovered our mops: strong, absorbent, and reusable. Within weeks, she was saving time, conserving water, and keeping her home spotless.
+    </p>
+    <p class="text-gray-700 mt-4 text-justify">
+      Today, she recommends them to everyone around her. These mops aren’t just cleaning tools—they're improving lives in humble households.
+    </p>
+  </div>
+  
+</div>
+
+<!-- Vidéo de présentation secondaire -->
+<div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center">
+  <!-- Vidéo 1 -->
+  <iframe class="w-full aspect-video rounded-xl shadow-md"
+          src="https://www.youtube.com/embed/gjJor9glyZ4"
+          title="Vidéo 1"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+
+  <!-- Vidéo 2 -->
+  <iframe class="w-full aspect-video rounded-xl shadow-md"
+          src="https://www.youtube.com/embed/tqS-LTBMM30"
+          title="Vidéo 2"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+</div>
+
+<!-- Section Objectifs futurs, rideaux et draps de lit avec icône et animation -->
+<div class="mt-12 max-w-4xl mx-auto bg-white p-8 rounded-xl shadow text-gray-700">
+  <div class="flex items-center mb-6">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-700 mr-3 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2l4 -4" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v7" />
+    </svg>
+    <h2 class="text-3xl font-bold text-green-700">🎯 Nos objectifs futurs</h2>
+  </div>
+  <p class="mb-4 leading-relaxed hover:text-green-800 transition-colors duration-300 cursor-pointer">
+    Chez <span class="font-semibold text-green-600">Serpillères Pro Bella</span>, notre ambition est de continuer à innover pour vous offrir des produits toujours plus performants, écologiques et adaptés à vos besoins.
+    Nous souhaitons élargir notre gamme avec des solutions pour tous les espaces de la maison, en mettant un accent particulier sur la qualité, la durabilité et le respect de l'environnement.
+  </p>
+  <p class="mb-6 leading-relaxed hover:text-green-800 transition-colors duration-300 cursor-pointer">
+    Nous développons également une nouvelle collection de <span class="font-semibold">rideaux de tout genre</span> : pour fenêtres, baies vitrées, chambres, salons, et même rideaux techniques (isolants, occultants, thermiques) pour allier esthétique et fonctionnalité.
+    Sans oublier nos <span class="font-semibold">draps de lit</span>, conçus pour offrir confort, douceur et résistance, disponibles dans une variété de tailles et de styles pour embellir vos chambres.
+  </p>
+  <p class="italic text-green-600 font-semibold">
+    « Notre mission : embellir votre intérieur tout en préservant la planète. »
+  </p>
+</div>
+
+<!-- Vidéo de présentation tertiaire -->
+<div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center">
+ <!-- Vidéo 1 -->
+  <iframe class="w-full aspect-video rounded-xl shadow-md"
+          src="https://www.youtube.com/embed/54bcoMkJDoY"
+          title="Vidéo 1"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+          
+  <!-- Vidéo 2 -->
+  <iframe class="w-full aspect-video rounded-xl shadow-md"
+          src="https://www.youtube.com/embed/FZV3-4ku0LM"
+          title="Vidéo 2"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+</div>
+
+
+
+<!-- Footer attractif -->
+<footer class="mt-16 bg-green-700 text-white py-10 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <!-- Résumé -->
+    <div>
+      <h3 class="text-2xl font-bold mb-4">Serpillères Pro Bella</h3>
+      <p class="text-green-200 leading-relaxed">
+        Des serpillières écologiques, ultra absorbantes et durables, conçues pour embellir et protéger votre intérieur.  
+        Une gamme variée adaptée à chaque besoin, avec une démarche respectueuse de la planète.
+      </p>
+    </div>
+
+    <!-- Contacts -->
+    <div>
+      <h3 class="text-xl font-semibold mb-4">Contactez-nous</h3>
+      <ul class="space-y-2 text-green-100">
+        <li>
+          📧 Email :  
+          <a href="mailto:Michadoskimicha@gmail.com" class="underline hover:text-white">Michadoskimicha@gmail.com</a>
+        </li>
+        <li>
+          💬 Telegram :  
+          <a href="https://t.me/Michadoski" target="_blank" rel="noopener" class="underline hover:text-white">@Michadoski</a>
+        </li>
+        <li>
+          📘 Facebook :  
+          <a href="https://facebook.com/Michael Vida" target="_blank" rel="noopener" class="underline hover:text-white">Michael Vida</a>
+        </li>
+        <li>
+          📱 Téléphone :  
+          <a href="tel:+2290151782679" class="underline hover:text-white">+229 01 51 78 26 79</a>
+        </li>
+        <li>
+          💚 WhatsApp :  
+          <a href="https://wa.me/2290151782679" target="_blank" class="underline hover:text-white">+229 01 51 78 26 79</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Formulaire Email rapide -->
+    <div>
+      <h3 class="text-xl font-semibold mb-4">Envoyez-nous un message</h3>
+      <form action="{{ url_for('send_message') }}" method="POST" class="space-y-3">
+        <input type="text" name="nom" placeholder="Votre nom" class="w-full p-2 rounded text-black" required>
+        <input type="email" name="email" placeholder="Votre email" class="w-full p-2 rounded text-black" required>
+        <textarea name="message" rows="3" placeholder="Votre message..." class="w-full p-2 rounded text-black" required></textarea>
+        <button type="submit" class="w-full bg-white text-green-700 font-semibold py-2 rounded hover:bg-green-100">
+          ✉️ Envoyer
+        </button>
+      </form>
+    </div>
+
+    <!-- Abonnement newsletter -->
+    <div>
+      <h3 class="text-xl font-semibold mb-4">📬 S’abonner</h3>
+      <p class="text-green-100 mb-3">Recevez nos nouveautés et offres directement par email.</p>
+      <form action="{{ url_for('subscribe') }}" method="POST" class="space-y-3">
+        <input type="email" name="newsletter_email" placeholder="Votre email" class="w-full p-2 rounded text-black" required>
+        <button type="submit" class="w-full bg-white text-green-700 font-semibold py-2 rounded hover:bg-green-100">
+          ✅ S’abonner
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="mt-10 text-center text-green-300 text-sm">
+    &copy; {{ current_year }} Serpillères Pro Bella. Tous droits réservés.
+  </div>
+</footer>
+
+</div>
+{% endblock %}
+

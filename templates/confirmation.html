@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mt-16">
+  <h2 class="text-2xl font-bold text-green-700">🎉 Merci pour votre commande !</h2>
+  {% if multiple %}
+  <p class="mt-4">Votre commande contenant plusieurs produits a bien été enregistrée.</p>
+  {% else %}
+  <p class="mt-4">Nous avons bien reçu votre commande de <strong>{{ produit.nom }}</strong>.</p>
+  {% endif %}
+  <p class="mt-2 text-gray-600">Nous vous contacterons par WhatsApp pour la livraison.</p>
+  <a href="{{ url_for('home') }}"
+     class="mt-6 inline-block bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+     Retour à l'accueil
+  </a>
+</div>
+{% endblock %}
+

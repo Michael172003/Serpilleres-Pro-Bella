@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Assistant Virtuel - Serpillères Bella</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-green-600 text-white p-4 flex justify-between items-center shadow">
+        <a href="{{ url_for('home') }}" class="font-bold text-xl">Serpillères Bella</a>
+        <a href="{{ url_for('home') }}" class="hover:underline">🏠 Retour à l'accueil</a>
+    </nav>
+
+    <!-- Chat Section -->
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl flex flex-col">
+            <!-- Chat Header -->
+            <div class="bg-green-600 text-white p-3 rounded-t-lg flex justify-between items-center">
+                <h2 class="text-lg font-bold">🤖 Assistant Virtuel</h2>
+                <span class="text-sm">En ligne</span>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="chat-box" class="p-4 overflow-y-auto h-96 border-b border-gray-200 space-y-3">
+                <!-- Message initial -->
+                <div class="flex justify-start">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 max-w-xs">
+                        Bonjour 👋 ! Je suis votre assistant virtuel. Posez-moi une question.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section Questions fréquentes -->
+<div class="bg-green-50 p-4 rounded-lg mb-4 max-w-2xl mx-auto">
+    <h3 class="font-bold mb-2 text-green-700">Questions fréquentes :</h3>
+    <div class="flex flex-wrap gap-2">
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="livraison">Livraison</button>
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="retour">Retour & Remboursement</button>
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="prix">Prix</button>
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="paiement">Paiement</button>
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="contact">Contact</button>
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="promo">Promotions</button>
+
+  <!-- Nouveaux sujets -->
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="qualité produit">Qualité produit</button>
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="utiliser">utiliser</button>
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="commande">Commande</button>
+  <button class="faq-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" data-question="livraison special">Livraison spéciale</button>
+
+    </div>
+</div>
+
+            <!-- Input -->
+            <form id="chat-form" class="flex p-3 space-x-2">
+                <input 
+                    name="message" 
+                    id="user-input" 
+                    type="text" 
+                    placeholder="Écrivez votre message..." 
+                    class="flex-grow border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-green-400" 
+                    required
+                    autocomplete="off"
+                >
+                <button 
+                    type="submit" 
+                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Envoyer
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 text-center p-3 text-sm text-gray-600">
+        &copy; {{ 2025 }} Serpillères Bella. Assistant virtuel pour vous aider 🤝
+    </footer>
+
+    <!-- Script JavaScript pour gérer le chat -->
+    <script>
+        const chatForm = document.getElementById("chat-form");
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+
+        // Fonction pour ajouter un message dans le chat
+        function addMessage(message, sender = 'bot') {
+            const div = document.createElement("div");
+            div.classList.add("flex");
+            div.classList.add(sender === 'user' ? "justify-end" : "justify-start");
+
+            const msgDiv = document.createElement("div");
+            msgDiv.classList.add("rounded-lg", "px-4", "py-2", "max-w-xs");
+            if (sender === 'user') {
+                msgDiv.classList.add("bg-green-600", "text-white");
+            } else {
+                msgDiv.classList.add("bg-gray-200");
+            }
+            msgDiv.textContent = message;
+
+            div.appendChild(msgDiv);
+            chatBox.appendChild(div);
+
+            // Scroll vers le bas
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        chatForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Affiche le message utilisateur dans le chat
+            addMessage(message, 'user');
+
+            // Envoi du message au serveur via fetch POST JSON
+            fetch('/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.reponse) {
+                    addMessage(data.reponse, 'bot');
+                } else if (data.error) {
+                    addMessage("Erreur : " + data.error, 'bot');
+                }
+            })
+            .catch(error => {
+                addMessage("Erreur de communication avec le serveur.", 'bot');
+                console.error(error);
+            });
+
+            // Vider le champ input
+            userInput.value = "";
+            userInput.focus();
+        });
+        
+        document.querySelectorAll('.faq-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const question = button.getAttribute('data-question');
+        
+        // Affiche la question comme si l'utilisateur l'avait tapée
+        addMessage(question, 'user');
+
+        // Envoi la question au chatbot
+        fetch('/chatbot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: question })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.reponse) {
+                addMessage(data.reponse, 'bot');
+            }
+        })
+        .catch(() => addMessage("Erreur de communication avec le serveur.", 'bot'));
+    });
+});
+        
+    </script>
+</body>
+</html>
+

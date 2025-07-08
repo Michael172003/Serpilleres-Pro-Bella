@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serpillères de Qualité</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+
+<!-- ✅ Notification flottante pour proposer la création de site -->
+<div id="site-offer" class="fixed bottom-4 right-4 bg-white border border-green-600 text-green-800 px-4 py-3 rounded-xl shadow-lg hidden z-50 transition-all duration-500 ease-in-out">
+  <p class="font-medium">👋 Vous avez besoin d’un site web professionnel ?</p>
+  <p class="text-sm mt-1">On vous crée un site moderne, rapide et adapté à vos goûts !</p>
+  <a href="https://wa.me/2290151782679" target="_blank" class="mt-2 inline-block bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm">
+    📲 Discuter sur WhatsApp
+  </a>
+  <button onclick="document.getElementById('site-offer').classList.add('hidden')" class="absolute top-1 right-2 text-xl leading-none">&times;</button>
+</div>
+
+<!-- 🐾 Mascotte flottante animée -->
+<div id="floating-mascot" class="fixed bottom-10 left-4 flex flex-col items-center z-50 space-y-2">
+    <!-- Mascotte image -->
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" 
+         alt="Mascotte" 
+         class="w-20 h-20 rounded-full border-4 border-green-400 shadow-lg bg-white cursor-pointer animate-float"
+         onclick="nextTip()" />
+
+    <!-- Bulle de tips -->
+    <div id="mascot-tip" class="bg-green-600 text-white text-sm px-4 py-2 rounded-lg shadow-lg relative max-w-xs animate-slide-in">
+        <span id="tip-text">💡 Bonjour 👋 Je suis Bella, votre assistante virtuelle ! Cliquez sur moi si vous voulez...</span>
+    </div>
+</div>
+
+<!-- Mascotte styles -->
+<style>
+  /* Flottement mignon */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Slide-in pour la bulle */
+  @keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.5s ease forwards;
+  }
+
+  #floating-mascot img:hover {
+    transform: scale(1.1) rotate(-5deg);
+    transition: transform 0.3s ease;
+  }
+
+  #mascot-tip::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    bottom: -10px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #16a34a transparent transparent transparent;
+  }
+</style>
+
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar fixe -->
+  <nav class="fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex justify-between items-center z-50">
+    <a href="{{ url_for('home') }}" class="text-xl font-bold text-green-600">Serpillères Pro Bella</a>
+    <div class="space-x-4">
+      <a href="{{ url_for('home') }}" class="hover:text-green-600">Accueil</a>
+      <a href="{{ url_for('produits') }}" class="hover:text-green-600">Produits</a>
+      <a href="{{ url_for('panier') }}" class="hover:text-green-600">Panier</a>
+      <a href="{{ url_for('contact') }}" class="hover:text-green-600">Contact</a>
+    </div>
+    
+  <form action="https://www.google.com/search" method="GET" target="_blank" class="flex">
+  <input 
+    type="text" 
+    name="q" 
+    placeholder="Rechercher sur Google..." 
+    class="border rounded-l px-3 py-1 w-60 focus:outline-none focus:ring focus:ring-green-400"
+    required>
+  <button 
+    type="submit" 
+    class="bg-green-600 text-white px-4 py-1 rounded-r hover:bg-green-700">
+    🔍
+  </button>
+</form>
+
+
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'fr'}, 'google_translate_element');
+}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<a href="{{ url_for('avis') }}" class="hover:text-green-600">Infos+</a>
+
+
+    <div class="space-x-3">
+      {% if session.get('user') %}
+        <span class="text-green-700">👤 {{ session.user }}</span>
+        <a href="{{ url_for('logout') }}" class="text-red-600 hover:text-red-800">Déconnexion</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="hover:text-green-600">Connexion</a>
+        <a href="{{ url_for('register') }}" class="hover:text-green-600">Inscription</a>
+      {% endif %}
+    </div>
+    <a href="{{ url_for('assistant') }}" class="hover:text-green-600">Assistant IA</a>
+  </nav>
+
+  <!-- Contenu principal -->
+  <div class="pt-24">
+    <main class="p-6">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="mb-4">
+            {% for category, message in messages %}
+              <div class="px-4 py-2 rounded bg-green-100 text-green-700 mb-2">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white shadow-md p-4 mt-12 text-center text-sm text-gray-500">
+    &copy; {{ 2025 }} Serpillères Pro — Tous droits réservés.
+  </footer>
+
+<script>
+  // Affiche la pop-up après 10 secondes
+  setTimeout(() => {
+    document.getElementById('site-offer').classList.remove('hidden');
+  }, 10000); // 10 000 ms = 10 secondes
+</script>
+
+<!-- Mascotte logic -->
+<script>
+  const tips = [
+    "🎁 Achetez 10 et obtenez 10% de réduction !",
+    "🚚 Livraison express sous 48h à Cotonou et 72h ailleurs.",
+    "💳 Paiement possible : Mobile Money, crypto, espèces à la livraison.",
+    "📦 Livraison à vos frais selon votre localisation.",
+    "🌟 Les clients fidèles bénéficient d'offres exclusives.",
+    "📞 Besoin d’aide ? Contactez-nous sur WhatsApp au 0151782679.",
+    "🧼 Nos serpillères sont en microfibre renforcée, ultra résistantes."
+  ];
+  let tipIndex = 0;
+
+  function speak(text) {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "fr-FR"; // Voix française
+      utterance.rate = 0.95; // Vitesse naturelle
+      utterance.pitch = 1.2; // Ton joyeux
+      utterance.volume = 1; // Volume maximum
+      speechSynthesis.cancel(); // Stoppe tout ce qui parlait avant
+      speechSynthesis.speak(utterance);
+
+      // Quand la voix termine, passer automatiquement au prochain message
+      utterance.onend = () => {
+        nextTip();
+      };
+    }
+  }
+
+  function showTip(text) {
+    const tipBox = document.getElementById('mascot-tip');
+    const tipText = document.getElementById('tip-text');
+    tipText.textContent = text;
+  }
+
+  function nextTip() {
+    const currentTip = tips[tipIndex];
+    showTip(currentTip);
+    speak(currentTip);
+    tipIndex = (tipIndex + 1) % tips.length; // Boucler les messages
+  }
+
+  // Démarre automatiquement à l'ouverture
+  window.addEventListener('load', () => {
+    nextTip();
+  });
+</script>
+
+  <!-- Flash messages (overlay) -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="fixed top-4 right-4 z-50 space-y-2">
+        {% for category, message in messages %}
+          <div class="px-4 py-2 rounded shadow text-white
+                      {% if category == 'success' %}bg-green-600{% else %}bg-red-500{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  
+</body>
+</html>
+
