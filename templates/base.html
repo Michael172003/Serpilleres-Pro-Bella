@@ -81,48 +81,61 @@
 
 <body class="bg-gray-100 text-gray-800">
 
-  <!-- Navbar fixe -->
-  <nav class="fixed top-0 left-0 right-0 bg-white shadow-md px-4 py-3 z-50">
+ <!-- Navbar responsive et harmonieux -->
+<nav class="fixed top-0 left-0 right-0 bg-white shadow-md px-4 py-3 z-50">
   <div class="flex justify-between items-center max-w-screen-xl mx-auto">
+    <!-- Logo -->
     <a href="{{ url_for('home') }}" class="text-xl font-bold text-green-600">Serpillères Pro Bella</a>
 
-    <!-- Bouton hamburger (mobile) -->
-    <button id="menu-btn" class="md:hidden text-green-600 text-2xl focus:outline-none">
+    <!-- Bouton hamburger (pour mobile) -->
+    <button id="menu-btn" class="md:hidden text-green-600 text-3xl focus:outline-none">
       ☰
     </button>
 
     <!-- Liens de navigation -->
-    <div id="nav-links" class="hidden md:flex md:items-center md:space-x-6 flex-col md:flex-row absolute md:static bg-white md:bg-transparent top-full left-0 w-full md:w-auto shadow-md md:shadow-none px-4 py-4 md:p-0 z-50">
-      <a href="{{ url_for('home') }}" class="block py-2 hover:text-green-600">Accueil</a>
-      <a href="{{ url_for('produits') }}" class="block py-2 hover:text-green-600">Produits</a>
-      <a href="{{ url_for('panier') }}" class="block py-2 hover:text-green-600">Panier</a>
-      <a href="{{ url_for('contact') }}" class="block py-2 hover:text-green-600">Contact</a>
-      <a href="{{ url_for('avis') }}" class="block py-2 hover:text-green-600">Infos+</a>
-      <a href="{{ url_for('assistant') }}" class="block py-2 hover:text-green-600">Assistant IA</a>
+    <div id="nav-links" class="hidden md:flex md:items-center md:space-x-6 flex-col md:flex-row absolute md:static bg-white md:bg-transparent top-full left-0 w-full md:w-auto shadow-md md:shadow-none px-4 py-4 md:p-0 transition-all duration-300 ease-in-out">
+      <a href="{{ url_for('home') }}" class="block py-2 hover:text-green-600 font-medium">Accueil</a>
+      <a href="{{ url_for('produits') }}" class="block py-2 hover:text-green-600 font-medium">Produits</a>
+      <a href="{{ url_for('panier') }}" class="block py-2 hover:text-green-600 font-medium">Panier</a>
+      <a href="{{ url_for('contact') }}" class="block py-2 hover:text-green-600 font-medium">Contact</a>
+      <a href="{{ url_for('avis') }}" class="block py-2 hover:text-green-600 font-medium">Infos+</a>
+      <a href="{{ url_for('assistant') }}" class="block py-2 hover:text-green-600 font-medium">Assistant IA</a>
+
       {% if session.get('user') %}
-        <span class="text-green-700 block py-2">👤 {{ session.user }}</span>
-        <a href="{{ url_for('logout') }}" class="block py-2 text-red-600 hover:text-red-800">Déconnexion</a>
+        <span class="text-green-700 block py-2 font-semibold">👤 {{ session.user }}</span>
+        <a href="{{ url_for('logout') }}" class="block py-2 text-red-600 hover:text-red-800 font-medium">Déconnexion</a>
       {% else %}
-        <a href="{{ url_for('login') }}" class="block py-2 hover:text-green-600">Connexion</a>
-        <a href="{{ url_for('register') }}" class="block py-2 hover:text-green-600">Inscription</a>
+        <a href="{{ url_for('login') }}" class="block py-2 hover:text-green-600 font-medium">Connexion</a>
+        <a href="{{ url_for('register') }}" class="block py-2 hover:text-green-600 font-medium">Inscription</a>
       {% endif %}
-      <!-- Recherche Google -->
-      <form action="https://www.google.com/search" method="GET" target="_blank" class="flex mt-2 md:mt-0 w-full md:w-auto">
+
+      <!-- Recherche Google intégrée -->
+      <form action="https://www.google.com/search" method="GET" target="_blank" class="flex mt-3 md:mt-0 w-full md:w-auto">
         <input 
           type="text" 
           name="q" 
           placeholder="Rechercher..." 
-          class="border rounded-l px-3 py-1 w-full md:w-60 focus:outline-none focus:ring focus:ring-green-400"
+          class="border rounded-l-lg px-3 py-2 w-full md:w-60 focus:outline-none focus:ring-2 focus:ring-green-400" 
           required>
         <button 
           type="submit" 
-          class="bg-green-600 text-white px-4 py-1 rounded-r hover:bg-green-700">
+          class="bg-green-600 text-white px-4 py-2 rounded-r-lg hover:bg-green-700">
           🔍
         </button>
       </form>
     </div>
   </div>
 </nav>
+
+<!-- Script pour rendre le menu mobile interactif -->
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const navLinks = document.getElementById('nav-links');
+
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('hidden');
+  });
+</script>
 
   <!-- Contenu principal -->
   <div class="pt-24">
@@ -157,13 +170,13 @@
 <!-- Mascotte logic -->
 <script>
   const tips = [
-    "🎁 Achetez 10 et obtenez 10% de réduction !",
-    "🚚 Livraison express sous 48h à Cotonou et 72h ailleurs.",
-    "💳 Paiement possible : Mobile Money, crypto, espèces à la livraison.",
-    "📦 Livraison à vos frais selon votre localisation.",
-    "🌟 Les clients fidèles bénéficient d'offres exclusives.",
-    "📞 Besoin d’aide ? Contactez-nous sur WhatsApp au 0151782679.",
-    "🧼 Nos serpillères sont en microfibre renforcée, ultra résistantes."
+    " Achetez 10 et obtenez 10% de réduction !",
+    " Livraison express sous 48h à Cotonou et 72h ailleurs.",
+    " Paiement possible : Mobile Money, crypto, espèces à la livraison.",
+    " Livraison à vos frais selon votre localisation.",
+    " Les clients fidèles bénéficient d'offres exclusives.",
+    " Besoin d’aide ? Contactez-nous sur WhatsApp au 0151782679.",
+    " Nos serpillères sont en microfibre renforcée, ultra résistantes."
   ];
   let tipIndex = 0;
 

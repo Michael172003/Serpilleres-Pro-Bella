@@ -1,25 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow mt-8">
-  <h2 class="text-2xl font-bold text-green-700 mb-4">Valider la commande</h2>
 
-  <h3 class="text-md mb-2 text-gray-800 font-semibold">Produits dans le panier :</h3>
-  <ul class="mb-4 text-gray-600 list-disc pl-5">
-    {% for item in panier %}
-      <li>{{ item.nom }} — {{ item.prix }}</li>
-    {% endfor %}
-  </ul>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-xl mt-10 animate-fadeIn">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-green-700 mb-6 text-center">
+    ✅ Finaliser votre commande
+  </h2>
 
-  <form method="POST" class="space-y-4">
-    <input type="text" name="nom" placeholder="Votre nom complet" required
-      class="w-full px-4 py-2 border rounded-lg">
-    <input type="text" name="telephone" placeholder="Votre numéro WhatsApp" required
-      class="w-full px-4 py-2 border rounded-lg">
-    <textarea name="adresse" placeholder="Votre adresse de livraison" required rows="3"
-      class="w-full px-4 py-2 border rounded-lg"></textarea>
+  <!-- Liste des produits -->
+  <div class="bg-gray-50 p-4 rounded-xl shadow-inner mb-6">
+    <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+      🛍️ Produits dans le panier :
+    </h3>
+    <ul class="list-disc list-inside space-y-2 text-gray-600">
+      {% for item in panier %}
+      <li class="flex justify-between">
+        <span>{{ item.nom }}</span>
+        <span class="font-semibold text-green-700">{{ item.prix }} FCFA</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Formulaire de validation -->
+  <form method="POST" class="space-y-5">
+    <div>
+      <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
+      <input type="text" name="nom" id="nom" placeholder="Votre nom complet" required
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-300">
+    </div>
+
+    <div>
+      <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Numéro WhatsApp</label>
+      <input type="text" name="telephone" id="telephone" placeholder="Votre numéro WhatsApp" required
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-300">
+    </div>
+
+    <div>
+      <label for="adresse" class="block text-sm font-medium text-gray-700 mb-1">Adresse de livraison</label>
+      <textarea name="adresse" id="adresse" placeholder="Votre adresse complète..." required rows="4"
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-300"></textarea>
+    </div>
+
     <button type="submit"
-      class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">Valider la commande</button>
+      class="w-full bg-green-600 text-white font-semibold py-3 rounded-full hover:bg-green-700 shadow-lg transition duration-300">
+      ✅ Valider ma commande
+    </button>
   </form>
+
+  <div class="mt-6 text-center">
+    <a href="{{ url_for('panier') }}"
+       class="inline-block text-green-700 hover:underline transition duration-300">
+      ← Retour au panier
+    </a>
+  </div>
 </div>
+
 {% endblock %}
 

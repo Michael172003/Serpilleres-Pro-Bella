@@ -1,45 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
-<h2 class="text-2xl font-bold text-center mb-6 text-green-700">Nos serpillières</h2>
 
-<!-- Bandeau d'information temporaire amélioré -->
-<div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-900 p-5 rounded-xl shadow-lg mb-6 flex items-start space-x-3">
-    <!-- Icône -->
-    <div class="text-3xl">⚠️</div>
-    <!-- Contenu -->
-    <div class="flex-1">
-        <h3 class="text-lg font-semibold">Note importante</h3>
-        <p class="mt-1 text-sm leading-relaxed">
-            Les produits sont en cours de préparation 🛠️ et les images seront ajoutées très bientôt, c'est possible de discuter avec l'assistant pour voir le reste de quelques serpillères de tout genre ou rideau soit draps en stock... 
-            <br>
-            📣 <strong>Vous souhaitez un site web du même style pour vos projets ou concepts ?</strong>
-            Discutez avec notre assistant sur WhatsApp en attendant.
-        </p>
+<!-- Titre principal -->
+<h2 class="text-3xl md:text-4xl font-extrabold text-center mb-8 text-green-700 animate-fadeIn">
+  🛒 Nos Serpillières Premium
+</h2>
 
-        <!-- Bouton WhatsApp -->
-        <a href="https://wa.me/2290151782679" target="_blank" 
-           class="inline-block mt-3 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 shadow">
-            💬 Contacter sur WhatsApp
-        </a>
-    </div>
+<!-- Bandeau d'information amélioré -->
+<div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-900 p-5 rounded-2xl shadow-xl mb-8 flex items-start space-x-4">
+  <!-- Icône -->
+  <div class="text-4xl animate-bounce">⚠️</div>
+
+  <!-- Contenu -->
+  <div class="flex-1">
+    <h3 class="text-lg md:text-xl font-bold text-yellow-700">Note importante</h3>
+    <p class="mt-2 text-gray-700 leading-relaxed">
+      Nos produits sont en cours de préparation 🛠️ et les images seront ajoutées très bientôt.
+      Vous pouvez discuter avec notre assistant pour voir les serpillières disponibles, rideaux ou draps actuellement en stock.
+    </p>
+
+    <!-- Bouton WhatsApp -->
+    <a href="https://wa.me/2290151782679" target="_blank"
+       class="inline-block mt-4 bg-green-600 text-white px-5 py-2 rounded-full shadow-lg hover:bg-green-700 transform hover:scale-105 transition">
+      💬 Contacter sur WhatsApp
+    </a>
+  </div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Grille des produits -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
   {% for produit in produits %}
-  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-    <img src="{{ url_for('static', filename='images/' + produit.image) }}" alt="{{ produit.nom }}" class="w-full h-48 object-cover">
-    <div class="p-4">
-      <h3 class="text-lg font-semibold text-green-800">{{ produit.nom }}</h3>
-      
-      <p class="text-gray-600 mt-2">{{ produit.prix }} FCFA</p>
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition duration-300">
+    
+    <!-- Image du produit -->
+    <img src="{{ url_for('static', filename='images/' + produit.image) }}" 
+         alt="{{ produit.nom }}" 
+         class="w-full h-56 object-cover hover:scale-105 transition duration-300">
 
-      <div class="mt-3 space-x-2">
-        <a href="{{ url_for('commander', index=loop.index0) }}" class="inline-block bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600 text-sm">Commander</a>
-        <a href="{{ url_for('ajouter_au_panier', index=loop.index0) }}" class="inline-block bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 text-sm">Ajouter au panier</a>
+    <!-- Infos produit -->
+    <div class="p-5">
+      <h3 class="text-xl font-semibold text-green-800 mb-1">{{ produit.nom }}</h3>
+      <p class="text-gray-600 mb-4 text-sm">💵 <span class="font-bold">{{ produit.prix }} FCFA</span></p>
+
+      <!-- Boutons actions -->
+      <div class="flex space-x-2">
+        <a href="{{ url_for('commander', index=loop.index0) }}"
+           class="flex-1 text-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+          ✅ Commander
+        </a>
+        <a href="{{ url_for('ajouter_au_panier', index=loop.index0) }}"
+           class="flex-1 text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+          🛒 Ajouter
+        </a>
       </div>
     </div>
   </div>
   {% endfor %}
 </div>
+
+<!-- Animation douce -->
+<script>
+  document.querySelectorAll('.grid div').forEach((card, i) => {
+    card.style.animation = `fadeInUp 0.3s ease ${i * 0.1}s forwards`;
+    card.style.opacity = 0;
+  });
+</script>
+
 {% endblock %}
 
