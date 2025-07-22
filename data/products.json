@@ -1,1 +1,102 @@
-[]
+[
+  {
+    "nom": "uno",
+    "prix": "3500 ",
+    "image": "1.png"
+  },
+  {
+    "nom": "dos",
+    "prix": "3500 ",
+    "image": "2.png"
+  },
+  {
+    "nom": "tres",
+    "prix": "3500 ",
+    "image": "3.png"
+  },
+  {
+    "nom": "cuatro",
+    "prix": "3500 ",
+    "image": "4.png"
+  },
+  {
+    "nom": "cinco ",
+    "prix": "5000",
+    "image": "5.png"
+  },
+  {
+    "nom": "seis",
+    "prix": "3500 ",
+    "image": "6.png"
+  },
+  {
+    "nom": "siete",
+    "prix": "4000",
+    "image": "7.png"
+  },
+  {
+    "nom": "ocho",
+    "prix": "4000",
+    "image": "8.png"
+  },
+  {
+    "nom": "nueve",
+    "prix": "4000",
+    "image": "9.png"
+  },
+  {
+    "nom": "diez",
+    "prix": "4000",
+    "image": "10.png"
+  },
+  {
+    "nom": "once ",
+    "prix": "5000",
+    "image": "11.png"
+  },
+  {
+    "nom": "doce",
+    "prix": "3500 ",
+    "image": "12.png"
+  },
+  {
+    "nom": "trece",
+    "prix": "3500 ",
+    "image": "13.png"
+  },
+  {
+    "nom": "catorce",
+    "prix": "3500 ",
+    "image": "14.png"
+  },
+  {
+    "nom": "quince",
+    "prix": "3500 ",
+    "image": "15.png"
+  },
+  {
+    "nom": "diecis\u00e9is",
+    "prix": "3500 ",
+    "image": "16.png"
+  },
+  {
+    "nom": "diecisiete",
+    "prix": "3500 ",
+    "image": "17.png"
+  },
+  {
+    "nom": "dieciocho",
+    "prix": "3500 ",
+    "image": "18.png"
+  },
+  {
+    "nom": "diecinueve",
+    "prix": "4000",
+    "image": "19.png"
+  },
+  {
+    "nom": "veinte",
+    "prix": "3500 ",
+    "image": "20.png"
+  }
+]

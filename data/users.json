@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "nom": "michael",
+    "email": "michadoskimicha@gmail.com",
+    "password": "scrypt:32768:8:1$7Y28upN5UJB8wWeg$b367fdd966910ae54d56c6905c4215e0fb9ae69d1355462d1deb46b0d2df58846a53ec1cf4c16725724f506074e3cfff2fea8a4eea2b10ed026df8ce5e78ad09"
+  }
+]
