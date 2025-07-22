@@ -1,38 +1,62 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, send_from_directory
 import json
 import os
-from datetime import datetime  
+from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
-import os
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
 
-app = Flask(__name__)
+# === Initialisation Flask ===
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, static_folder='static', template_folder='templates')
+app.secret_key = 'super_secret_key_à_personnaliser'  # 🔒 change ceci pour la prod
 
-USERS_FILE = "data/users.json"
+# === Chemins absolus ===
+PRODUCTS_FILE = os.path.join(BASE_DIR, 'data', 'products.json')
+USERS_FILE = os.path.join(BASE_DIR, 'data', 'users.json')
+COMMANDES_FILE = os.path.join(BASE_DIR, 'data', 'commandes.json')
 
-app = Flask(__name__)
-app.secret_key = 'un_secret_pour_flask'  # Nécessaire pour afficher les messages flash
+# === Charger variables .env ===
+load_dotenv()
 
-load_dotenv()  # Charge les variables depuis le fichier .env
+# === SMTP Config ===
+SMTP_SERVER = 'smtp.gmail.com'
+SMTP_PORT = 587
+SMTP_USERNAME = os.getenv('SMTP_USERNAME')
+SMTP_PASSWORD = os.getenv('SMTP_PASSWORD')
 
-app = Flask(__name__)
-app.secret_key = 'super_secret_key_à_personnaliser'
-
-PRODUCTS_FILE = 'data/products.json'
 ADMIN_PASSWORD = 'admin123'  # 🔒 change-le ici
 
-# ========= Routes publiques =========
+# === Routes ===
+
 @app.route('/')
 def home():
     return render_template('home.html')
 
 @app.route('/produits')
 def produits():
-    with open(PRODUCTS_FILE) as f:
-        produits = json.load(f)
+    try:
+        with open(PRODUCTS_FILE, encoding='utf-8') as f:
+            produits = json.load(f)
+        print(f"✅ {len(produits)} produit(s) chargé(s) depuis {PRODUCTS_FILE}")
+    except FileNotFoundError:
+        print(f"❌ Le fichier {PRODUCTS_FILE} est introuvable.")
+        produits = []
+    except json.JSONDecodeError as e:
+        print(f"❌ Erreur JSON dans {PRODUCTS_FILE} : {e}")
+        produits = []
+    except Exception as e:
+        print(f"❌ Erreur inattendue : {e}")
+        produits = []
+
     return render_template('products.html', produits=produits)
+
+# Servir le static proprement
+@app.route('/static/<path:filename>')
+def custom_static(filename):
+    return send_from_directory(app.static_folder, filename)
+
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():

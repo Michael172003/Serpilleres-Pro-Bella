@@ -6,65 +6,49 @@
   🛒 Nos Serpillières Premium
 </h2>
 
-<!-- Bandeau d'information amélioré -->
-<div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-900 p-5 rounded-2xl shadow-xl mb-8 flex items-start space-x-4">
-  <!-- Icône -->
-  <div class="text-4xl animate-bounce">⚠️</div>
+<!-- Compteur de produits -->
+<p class="text-center text-gray-500 mb-6">
+  🛍️ <span class="font-semibold">{{ produits|length }}</span> produit(s) disponible(s)
+</p>
 
-  <!-- Contenu -->
-  <div class="flex-1">
-    <h3 class="text-lg md:text-xl font-bold text-yellow-700">Note importante</h3>
-    <p class="mt-2 text-gray-700 leading-relaxed">
-      Nos produits sont en cours de préparation 🛠️ et les images seront ajoutées très bientôt.
-      Vous pouvez discuter avec notre assistant pour voir les serpillières disponibles, rideaux ou draps actuellement en stock.
-    </p>
+<!-- Vérifier si la liste de produits n’est pas vide -->
+{% if produits %}
+  <!-- Grille des produits -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {% for produit in produits %}
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition duration-300">
+      
+      <!-- Image du produit -->
+      <img src="{{ url_for('static', filename='images/' ~ produit.image) }}"
+           alt="{{ produit.nom }}"
+           onerror="this.src='{{ url_for('static', filename='images/placeholder.png') }}';"
+           class="w-full h-56 object-cover hover:scale-105 transition duration-300">
 
-    <!-- Bouton WhatsApp -->
-    <a href="https://wa.me/2290151782679" target="_blank"
-       class="inline-block mt-4 bg-green-600 text-white px-5 py-2 rounded-full shadow-lg hover:bg-green-700 transform hover:scale-105 transition">
-      💬 Contacter sur WhatsApp
-    </a>
-  </div>
-</div>
+      <!-- Infos produit -->
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-green-800 mb-1">{{ produit.nom }}</h3>
+        <p class="text-gray-600 mb-4 text-sm">💵 <span class="font-bold">{{ produit.prix }} FCFA</span></p>
 
-<!-- Grille des produits -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-  {% for produit in produits %}
-  <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition duration-300">
-    
-    <!-- Image du produit -->
-    <img src="{{ url_for('static', filename='images/' + produit.image) }}" 
-         alt="{{ produit.nom }}" 
-         class="w-full h-56 object-cover hover:scale-105 transition duration-300">
-
-    <!-- Infos produit -->
-    <div class="p-5">
-      <h3 class="text-xl font-semibold text-green-800 mb-1">{{ produit.nom }}</h3>
-      <p class="text-gray-600 mb-4 text-sm">💵 <span class="font-bold">{{ produit.prix }} FCFA</span></p>
-
-      <!-- Boutons actions -->
-      <div class="flex space-x-2">
-        <a href="{{ url_for('commander', index=loop.index0) }}"
-           class="flex-1 text-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
-          ✅ Commander
-        </a>
-        <a href="{{ url_for('ajouter_au_panier', index=loop.index0) }}"
-           class="flex-1 text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
-          🛒 Ajouter
-        </a>
+        <!-- Boutons actions -->
+        <div class="flex space-x-2">
+          <a href="{{ url_for('commander', index=loop.index0) }}"
+             class="flex-1 text-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+            ✅ Commander
+          </a>
+          <a href="{{ url_for('ajouter_au_panier', index=loop.index0) }}"
+             class="flex-1 text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+            🛒 Ajouter
+          </a>
+        </div>
       </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
-
-<!-- Animation douce -->
-<script>
-  document.querySelectorAll('.grid div').forEach((card, i) => {
-    card.style.animation = `fadeInUp 0.3s ease ${i * 0.1}s forwards`;
-    card.style.opacity = 0;
-  });
-</script>
+{% else %}
+  <p class="text-center text-red-500 font-semibold mt-8">
+    🚫 Aucun produit disponible pour le moment.
+  </p>
+{% endif %}
 
 {% endblock %}
 
